@@ -14,6 +14,14 @@ namespace PythonNetStubGenerator
         private static readonly HashSet<string> CurrentNamespaces = new HashSet<string>();
         private static readonly HashSet<Type> OverloadedNonGenericTypes = new HashSet<Type>();
 
+        public static void Reset()
+        {
+            ClearCurrent();
+
+            AllExportedTypes.Clear();
+            DirtyNamespaces.Clear();
+            OverloadedNonGenericTypes.Clear();
+        }
 
         public static void CacheOverloadedNonGenericTypes(IEnumerable<Type> stubTypes)
         {
