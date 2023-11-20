@@ -12,6 +12,9 @@ namespace PythonNetStubGenerator
         
         public static DirectoryInfo BuildAssemblyStubs(DirectoryInfo destPath, FileInfo[] targetAssemblyPaths, DirectoryInfo[] searchPaths = null)
         {
+            // reset all context
+            Reset();
+
             // prepare resolver
             AppDomain.CurrentDomain.AssemblyResolve -= AssemblyResolve;
             AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve;
@@ -64,6 +67,12 @@ namespace PythonNetStubGenerator
 
 
             return destPath;
+        }
+
+        private static void Reset()
+        {
+            SearchPaths.Clear();
+            PythonTypes.Reset();
         }
 
         internal static void WriteStub(DirectoryInfo rootDirectory, string nameSpace, IEnumerable<Type> stubTypes)
